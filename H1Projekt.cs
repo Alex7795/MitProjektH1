@@ -78,16 +78,19 @@ namespace MitProjektH1
                     case "1":
                         kiaIsRunning = true;
                         Console.WriteLine("You've chosen the Kia");
+                        methods.Questions("SELECT * FROM Cars WHERE ID = 1");
                         Console.ReadKey();
                         break;
                     case "2":
                         porscheIsRunning = true;
                         Console.WriteLine("You've chosen the Porsche");
+                        methods.Questions("SELECT * FROM Cars WHERE ID = 2");
                         Console.ReadKey();
                         break;
                     case "3":
                         teslaIsRunning = true;
                         Console.WriteLine("You've chosen the Tesla");
+                        methods.Questions("SELECT * FROM Cars WHERE ID = 3");
                         Console.ReadKey();
                         break;
                     default:
@@ -95,7 +98,6 @@ namespace MitProjektH1
                         Console.ReadKey();
                         break;
                 }
-                methods.Questions();
                 Console.ReadKey();
 
             }
@@ -104,11 +106,10 @@ namespace MitProjektH1
 
     class methods
     {
-        public void Questions()
+        public void Questions(string query)
         {
             string connectionString = "datasource=127.0.0.1;port=3306;username=root;password=;database = H1Project;";
             MySqlConnection databaseConnection = new MySqlConnection(connectionString);
-            string query = "";
 
             MySqlCommand commandsDatabase = new MySqlCommand(query, databaseConnection);
             MySqlDataReader reader;
@@ -122,16 +123,25 @@ namespace MitProjektH1
                 "\n" +
                 "1. Quickly gas up and try to prevent getting hit \n" +
                 "2. Brake and pray he swerves around you, or manages to brake in time");
-            Console.ReadKey();
 
             string input = Console.ReadLine();
+            Console.Clear();
             switch (input)
             {
                 case "1":
-                    if(reader.GetInt32 == )
-                    Console.WriteLine("");
-                    Console.ReadKey();
-                    break;
+                    reader.Read();
+                    if (reader.GetInt32(5) > 50)
+                    {
+                        Console.WriteLine("Smart moves, your car was fast enough to speed out of the trouble!");
+                        Console.ReadKey();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Your car doesnt accelerate fast enough, your family trip ends in misery");
+                        return;
+                    }
+
                 case "2":
                     Console.WriteLine("");
                     Console.ReadKey();
@@ -141,7 +151,7 @@ namespace MitProjektH1
                     Console.ReadKey();
                     break;
             }
-
+            Console.Clear();
             Console.WriteLine("You've started to overtake another car. It's dark and you realize that an oncoming cars light is out \n" +
                 "What is your reaction? \n" +
                 "\n" +
@@ -194,4 +204,3 @@ namespace MitProjektH1
         public int handling = 45;
     }
 }
-
