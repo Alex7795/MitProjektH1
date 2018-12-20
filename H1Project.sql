@@ -1,0 +1,9 @@
+CREATE DATABASE H1Project;
+
+USE H1Project;
+
+CREATE TABLE Cars (
+ID INT PRIMARY KEY AUTO_INCREMENT,
+CarName TEXT,
+PackingSpace INT,
+)
