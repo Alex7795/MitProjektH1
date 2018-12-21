@@ -1,6 +1,6 @@
 
 
-						\\WINDOWS ONLY//
+								\\WINDOWS ONLY//
 
 Install the included setup in the folder.
 
