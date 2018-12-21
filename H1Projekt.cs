@@ -117,7 +117,8 @@ namespace MitProjektH1
             databaseConnection.Open();
 
             reader = commandsDatabase.ExecuteReader();
-
+            Console.ReadKey();
+            Console.Clear();
             Console.WriteLine("You're driving down a road, suddenly a car comes blasting from your right \n" +
                 "What is your reaction? \n" +
                 "\n" +
@@ -143,29 +144,122 @@ namespace MitProjektH1
                     }
 
                 case "2":
-                    Console.WriteLine("");
-                    Console.ReadKey();
-                    break;
+                    reader.Read();
+                    if (reader.GetInt32(8) > 50)
+                    {
+                        Console.WriteLine("The guy driving was DUI. But since you chose a car with good safety points \n" +
+                            "You're all still alive! However the trip took an extra 6 hours to complete");
+                        Console.ReadKey();
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The guy driving was DUI. Your cars safety rating isn't great \n" +
+                            "Your family trip ends in misery");
+                        Console.ReadKey();
+                        return;
+                    }
                 default:
                     Console.WriteLine("Are you sure you picked a number from 1-3?");
                     Console.ReadKey();
                     break;
+
+            }
+
+            Console.WriteLine("You've started to overtake another car. It's dark and you realize that the oncoming cars light is out \n" +
+            "What is your reaction? \n" +
+            "\n" +
+            "1. Speed up and quickly get in front of the car you were overtaking \n" +
+            "2. Try to brake and reposition yourself behind the car you were overtaking \n" +
+            "3. Try to swerve left into the ditch and that way evade the oncoming car");
+
+            string input2 = Console.ReadLine();
+            Console.Clear();
+            switch (input2)
+            {
+                case "1":
+                    reader.Read();
+                    if (reader.GetInt32(5) > 89)
+                    {
+                        Console.WriteLine("Man that was close, The guy almost hit you! luckily your acceleration saved you and your family");
+                        Console.ReadKey();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Your car isn't fast enough, and you hit the oncomiong car head on \n" +
+                            "Your family trip ends in misery");
+                        return;
+                    }
+
+                case "2":
+                    reader.Read();
+                    if (reader.GetInt32(9) > 60)
+                    {
+                        Console.WriteLine("You chose the right car for this manouver! Your cars handling is great \n" +
+                            "and you therefore manages to brake and get in behind the car in safety");
+                        Console.ReadKey();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Your cars handling is too poor, and you therefore didn't make it in time");
+                        Console.ReadKey();
+                        return;
+                    }
+
+                case "3":
+                    Console.WriteLine("Why did you think the ditch was a good option? \n" +
+                        "You hit a huge rock and totalled your car. \n" +
+                        "Your family trip ends in misery");
+                    Console.ReadKey();
+                    return;
+
             }
             Console.Clear();
-            Console.WriteLine("You've started to overtake another car. It's dark and you realize that an oncoming cars light is out \n" +
-                "What is your reaction? \n" +
-                "\n" +
-                "1. Speed up and quickly get in front of the car you were overtaking \n" +
-                "2. Try to brake and reposition yourself behind the car you were overtaking \n" +
-                "3. Try to swerve left into the ditch and that way evade the oncoming car");
-
             Console.WriteLine("you've missed the gastank/chargingstation you wanted to pull in at \n" +
-                "your fuel/battery gage is low. \n" +
+                "your fuel/battery gauge is low. \n" +
                 "what do you do? \n" +
                 "\n" +
                 "1. Keep driving until you meet another gas station \n" +
                 "2. Take the next exit on the freeway, turn around, and go back \n" +
-                "3. Ignores the fuel/battery gage");
+                "3. Ignores the fuel/battery gauge");
+
+            string input3 = Console.ReadLine();
+            Console.Clear();
+            switch (input3)
+            {
+                case "1":
+                    reader.Read();
+                    if (reader.GetInt32(7) > 50)
+                    {
+                        Console.WriteLine("You managed to find another gasstation before you ran out. \n" +
+                            "You may continue your trip.");
+                        Console.ReadKey();
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Your car ran out of fuel! you and the family is now stuck in the middle of the freeway. \n" +
+                            "a guy behind you haven't seen you and smashes his truck right in the rear of your car \n" +
+                            "Your family trip ends in misery");
+                        return;
+                    }
+
+                case "2":
+                    {
+                        Console.WriteLine("Good call! Better be safe than sorry");
+                        Console.ReadKey();
+                        break;
+                    }
+
+                case "3":
+                    Console.WriteLine("Why would you ignore your fuelgauge? You've run out of fuel \n" +
+                        "A truck who's driver is on the phone, haven't seen you standing still on the freeway \n" +
+                        "Your family trip ends in misery");
+                    Console.ReadKey();
+                    return;
+            }
         }
     }
 
